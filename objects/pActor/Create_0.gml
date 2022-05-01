@@ -5,7 +5,13 @@ xScale = 1;
 yScale = 1;
 facing = 1;
 
-CollisionEnd = function()
+drawShadow = true;
+shadowType = SHADOW_TYPES.NORMAL;
+
+z = 0;
+
+
+EndStep = function()
 {
 	
 }

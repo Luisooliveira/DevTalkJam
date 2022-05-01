@@ -1,14 +1,3 @@
-var bboxSide;
-
-if (xSpeed >= 0)
-{
-	bboxSide = bbox_right;
-}
-else
-{
-	bboxSide = bbox_left;
-}
-
 // Object collision
 if (place_meeting(x + xSpeed, y, pSolid))
 {
@@ -21,15 +10,6 @@ if (place_meeting(x + xSpeed, y, pSolid))
 }
 
 x += xSpeed;
-
-if (ySpeed >= 0)
-{
-	bboxSide = bbox_bottom;
-}
-else
-{
-	bboxSide = bbox_top;
-}
 
 // Object collision
 if (place_meeting(x, y + ySpeed, pSolid))
@@ -44,7 +24,7 @@ if (place_meeting(x, y + ySpeed, pSolid))
 
 y += ySpeed;
 
-CollisionEnd();
+EndStep();
 
 xScale = lerp(xScale, 1, .15);
 yScale = lerp(yScale, 1, .15);

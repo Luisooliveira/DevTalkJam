@@ -1,0 +1,6 @@
+enum SHADOW_TYPES
+{
+	SMALL,
+	NORMAL,
+	BIG
+}
