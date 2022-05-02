@@ -2,5 +2,12 @@ enum SHADOW_TYPES
 {
 	SMALL,
 	NORMAL,
-	BIG
+	BIG,
+	HUGE
+}
+
+enum PS_EVENT
+{
+	INST_ID,
+	INST_FUNC
 }

@@ -1,13 +1,16 @@
-cam = VIEW;
+cam = view_camera[0];
 
 target = oPlayer;
 
-xTo = xstart;
-yTo = ystart;
+xTo = oPlayer.x;
+yTo = oPlayer.y;
 spd = 15;
+
+width = WIDTH;
+height = HEIGHT;
+wHalf = width * 0.5;
+hHalf = height * 0.5;
 
 shakeLength = 0;
 shakeMagnitude = 0;
 shakeRemain = 0;
-
-background = layer_get_id("Background2");

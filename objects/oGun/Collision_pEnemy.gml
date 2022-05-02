@@ -6,6 +6,6 @@ if (global.capturedEnemy == other.id)
 		global.ectoplasm += global.capturedEnemy.ectoplasm;
 	}
 	
-	instance_destroy(global.capturedEnemy);
+	global.capturedEnemy.captured = true;
 	global.capturedEnemy = noone;
 }

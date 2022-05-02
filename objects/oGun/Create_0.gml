@@ -12,7 +12,7 @@ recoil = 4;
 // Attacking
 attacking = false;
 attackWidth = 0;
-attackMaxWidth = 4;
+attackMaxWidth = 3;
 attackXTo = -1;
 attackYTo = -1;
 
@@ -57,11 +57,11 @@ AttackUpdate = function()
 
 AttackRender = function()
 {
-	var dis = 96;
+	var dis = 64;
 	var dir = image_angle;
 	
-	var _x = owner.x - (0.5) + lengthdir_x(14, dir);
-	var _y = (owner.y + owner.gunYOffset) + lengthdir_y(14, dir);
+	var _x = owner.x + lengthdir_x(12, dir);
+	var _y = (owner.y + owner.gunYOffset) + lengthdir_y(12, dir);
 	
 	var xTo = _x + lengthdir_x(dis, dir);
 	var yTo = _y + lengthdir_y(dis, dir);
@@ -73,35 +73,40 @@ AttackRender = function()
 	
 	vertex_begin(attackVertexBuffer, global.vFormat);
 	
+	var _depth = -9999;
 	//draw_line_width_color(_x, _y, xTo, yTo, attackWidth, attackColor, attackColor);
 	x0 = _x + lengthdir_x( attackWidth, dir + 90);
 	y0 = _y + lengthdir_y( attackWidth, dir + 90);
 	x1 = _x + lengthdir_x(-attackWidth, dir + 90);
 	y1 = _y + lengthdir_y(-attackWidth, dir + 90);
 	
-	x2 = xTo + lengthdir_x( attackWidth * 3, dir + 90);
-	y2 = yTo + lengthdir_y( attackWidth * 3, dir + 90);
-	x3 = xTo + lengthdir_x(-attackWidth * 3, dir + 90);
-	y3 = yTo + lengthdir_y(-attackWidth * 3, dir + 90);
+	x2 = xTo + lengthdir_x( attackWidth * 3.5, dir + 90);
+	y2 = yTo + lengthdir_y( attackWidth * 3.5, dir + 90);
+	x3 = xTo + lengthdir_x(-attackWidth * 3.5, dir + 90);
+	y3 = yTo + lengthdir_y(-attackWidth * 3.5, dir + 90);
 	
-	vertex_position(attackVertexBuffer, x0, y0);
+	vertex_position_3d(attackVertexBuffer, x0, y0, _depth);
 	vertex_color(attackVertexBuffer, attackColor, 0.75);
-	vertex_position(attackVertexBuffer, x1, y1);
+	vertex_position_3d(attackVertexBuffer, x1, y1, _depth);
 	vertex_color(attackVertexBuffer, attackColor, 0.75);
-	vertex_position(attackVertexBuffer, x2, y2);
+	vertex_position_3d(attackVertexBuffer, x2, y2, _depth);
 	vertex_color(attackVertexBuffer, attackColor, 0);
 	
-	vertex_position(attackVertexBuffer, x1, y1);
+	vertex_position_3d(attackVertexBuffer, x1, y1, _depth);
 	vertex_color(attackVertexBuffer, attackColor, 0.75);
-	vertex_position(attackVertexBuffer, x2, y2);
+	vertex_position_3d(attackVertexBuffer, x2, y2, _depth);
 	vertex_color(attackVertexBuffer, attackColor, 0);
-	vertex_position(attackVertexBuffer, x3, y3);
+	vertex_position_3d(attackVertexBuffer, x3, y3, _depth);
 	vertex_color(attackVertexBuffer, attackColor, 0);
 	
 	vertex_end(attackVertexBuffer);
 	
 	vertex_submit(attackVertexBuffer, pr_trianglelist, -1);
 	vertex_delete_buffer(attackVertexBuffer);
+	
+	draw_set_color(c_blue);
+	draw_sprite_pos(sAttackEffect, 0, x0, y0, x2, y2, x1, y1, x3, y3, .5);
+	draw_set_color(c_white);
 }
 
 AttackEnd = function()

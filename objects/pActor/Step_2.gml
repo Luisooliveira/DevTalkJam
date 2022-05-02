@@ -1,30 +1,42 @@
+var finalXSpeed = xSpeed + knockbackForceX;
+var finalYSpeed = ySpeed + knockbackForceY;
+
 // Object collision
-if (place_meeting(x + xSpeed, y, pSolid))
+if (place_meeting(x + finalXSpeed, y, pSolid))
 {
-	var onePixel = sign(xSpeed);
+	var onePixel = sign(finalXSpeed);
 	while (!place_meeting(x + onePixel, y, pSolid))
 	{
 		x += onePixel;
 	}
-	xSpeed = 0;
+	finalXSpeed = 0;
 }
 
-x += xSpeed;
+x += finalXSpeed;
 
 // Object collision
-if (place_meeting(x, y + ySpeed, pSolid))
+if (place_meeting(x, y + finalYSpeed, pSolid))
 {
-	var onePixel = sign(ySpeed);
+	var onePixel = sign(finalYSpeed);
 	while (!place_meeting(x, y + onePixel, pSolid))
 	{
 		y += onePixel;
 	}
-	ySpeed = 0;
+	finalYSpeed = 0;
 }
 
-y += ySpeed;
+y += finalYSpeed;
 
+if (lerpScale)
+{
+	xScale = lerp(xScale, maxXScale, scaleLerpAmount);
+	yScale = lerp(yScale, maxYScale, scaleLerpAmount);
+}
+
+depth = -bbox_bottom;
+
+var force = 0.15;
+knockbackForceX = Approach(knockbackForceX, 0, force);
+knockbackForceY = Approach(knockbackForceY, 0, force);
+	
 EndStep();
-
-xScale = lerp(xScale, 1, .15);
-yScale = lerp(yScale, 1, .15);

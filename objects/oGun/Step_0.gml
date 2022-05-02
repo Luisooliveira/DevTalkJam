@@ -19,7 +19,7 @@ if (keyShoot)
 else
 {
 	attacking = false;
-	global.capturedEnemy = noone;
+	global.purifiedEnemy = noone;
 }
 
 if (!attacking)

@@ -1,8 +1,3 @@
-width = WIDTH;
-height = HEIGHT;
-wHalf = width * 0.5;
-hHalf = height * 0.5;
-
 if (instance_exists(target))
 {
 	xTo = target.x;

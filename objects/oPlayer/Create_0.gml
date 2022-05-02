@@ -44,8 +44,35 @@ runAcceleration = 0.4;
 gunYOffset = -4;
 gunDepth = depth;
 
-gun = instance_create_depth(x, y + gunYOffset, depth - 1, oGun);
-gun.owner = id;
+weapon = instance_create_depth(x, y + gunYOffset, depth - 1, oGun);
+weapon.owner = id;
+
+Hurt = function(by)
+{
+	PubsubPublish("Player hurt");
+	var force = 1.5;
+	var dir = point_direction(x, y, other.x, other.y) - 180;
+	knockbackForceX = lengthdir_x(force, dir);
+	knockbackForceY = lengthdir_y(force, dir);
+}
+
+ChangeWeapon = function()
+{
+	if (global.weaponSlot == 0)
+	{
+		instance_destroy(weapon);
+		
+		weapon = instance_create_depth(x, y + gunYOffset, depth - 1, oGun);
+		weapon.owner = id;
+	}
+	else
+	{
+		instance_destroy(weapon);
+		
+		weapon = instance_create_depth(x, y + gunYOffset, depth - 1, oWeapon);
+		weapon.owner = id;
+	}
+}
 
 EndStep = function()
 {
@@ -55,7 +82,7 @@ EndStep = function()
 	// Animating the player
 	Animation(mouseIsDragging);
 	// Gun's position update
-	gun.UpdatePosition();
+	weapon.UpdatePosition();
 }
 
 #region Jump (obsolete)
@@ -93,10 +120,7 @@ UpdateInput = function(mouseIsDragging)
 	
 	if (global.inputMode == KEYBOARD)
 	{
-		if (mouseIsDragging)
-		{
 			global.inputDirection = point_direction(x, y, mouse_x, mouse_y);
-		}
 	}
 	else
 	{
