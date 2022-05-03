@@ -29,8 +29,13 @@ if (!purified)
 	if (fly)
 	{
 		z = 6 + (sin(siner * 0.03) * 2);
+		spriteY = y - z;
 		siner++;
 		siner %= 360;
+	}
+	else
+	{
+		spriteY = y;
 	}
 	
 	// Checking for collision with the gun
@@ -88,6 +93,15 @@ if (!purified)
 		var rand = random_range(0.5, 1.0);
 		xSpeed += lengthdir_x(rand, dir);
 		ySpeed += lengthdir_y(rand, dir);
+		
+		if (alarm_get(1) == -1)
+		{
+			alarm[1] = 3;
+		}
+		if (alarm_get(0) == -1)
+		{
+			alarm[0] = 1;
+		}
 	}
 	else
 	{
@@ -113,6 +127,7 @@ else
 			global.purifiedEnemy = noone;
 		}
 		instance_destroy();
+		global.ectoplasm++;
 	}
 }
 

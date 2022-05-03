@@ -3,7 +3,7 @@
 #macro HEIGHT 180
 #macro SURFACE_WIDTH (WIDTH)
 #macro SURFACE_HEIGHT (HEIGHT)
-#macro DISPLAY_WIDTH (WIDTH * 3)
-#macro DISPLAY_HEIGHT (HEIGHT * 3)
+#macro DISPLAY_WIDTH (WIDTH)
+#macro DISPLAY_HEIGHT (HEIGHT)
 #macro SAVE_DATA global.saveData
 #macro PUBSUB_MANAGER global.pubsubManager

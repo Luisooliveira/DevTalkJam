@@ -30,6 +30,8 @@ invincible = false;
 invincibleTime = room_speed * 0.5;
 invincibleTimer = 0;
 
+spriteY = 0;
+
 OnAreaOverlap = function()
 {
 	

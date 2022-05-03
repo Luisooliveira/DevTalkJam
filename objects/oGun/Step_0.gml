@@ -15,9 +15,16 @@ if (keyShoot)
 		currentRecoil = recoil;
 	}
 	AttackUpdate();
+	sprite_index = sGunPurifing;
+	with (oHUD)
+	{
+		gunXScale = lerp(gunXScale, -2.5, .15);
+		gunYScale = lerp(gunYScale, 2.5, .15);
+	}
 }
 else
 {
+	sprite_index = sGun;
 	attacking = false;
 	global.purifiedEnemy = noone;
 }
@@ -40,13 +47,23 @@ if (global.ectoplasm >= ectoplasmAttackCost)
 			currentRecoil = recoil;
 		
 			var dir = global.inputDirection;
-			with (instance_create_depth(x, y, depth, oEctoplasmBullet))
+			with (instance_create_depth(x + lengthdir_x(12, dir), y + lengthdir_y(12, dir), depth + 1, oEctoplasmBullet))
 			{
-				speed = 3.;
+				speed = 4.0;
 				direction = dir;
 				image_angle = dir;
+				image_xscale = 2.5;
+				image_yscale = 2.5;
 			}
 			currentCooldown = cooldown;
+			xScale = 1.5;
+			yScale = 1.5;
+			
+			with (oHUD)
+			{
+				gunXScale = -2;
+				gunYScale = 2;
+			}
 		}
 	}
 }
@@ -55,3 +72,6 @@ currentDelay = max(currentDelay - 1, -1);
 
 if (currentDelay == -1) currentCooldown = max(currentCooldown - 1, 0);
 currentRecoil = max(floor(currentRecoil * .8), 0);
+
+xScale = lerp(xScale, 1, .15);
+yScale = lerp(yScale, 1, .15);

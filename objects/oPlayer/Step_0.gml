@@ -10,9 +10,10 @@ keyUp = InputCheck("keyUp");
 stMachine.Update();
 
 // Changing weapon slot
-var keyChange = (mouse_wheel_down() - mouse_wheel_up());
+var keyChangeLeft = keyboard_check_pressed(ord("Q")) || mouse_wheel_up();
+var keyChangeRight = keyboard_check_pressed(ord("E")) || mouse_wheel_down();
 
-if (keyChange == 1)
+if (keyChangeLeft)
 {
 	global.weaponSlot++;
 	if (global.weaponSlot > 1)
@@ -21,7 +22,7 @@ if (keyChange == 1)
 	}
 	ChangeWeapon();
 }
-else if (keyChange == -1)
+else if (keyChangeRight)
 {
 	global.weaponSlot--;
 	if (global.weaponSlot < 0)

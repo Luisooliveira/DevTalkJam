@@ -56,11 +56,11 @@ global.inputDirection = 0;
 global.lastMouseX = mouse_x;
 global.lastMouseY = mouse_y;
 
-global.maxEctoplasm = 100;
+global.maxEctoplasm = 10;
 global.ectoplasm = 0;
 global.purifiedEnemy = noone;
 
-global.playerMaxLife = 100;
+global.playerMaxLife = 3;
 global.playerLife = global.playerMaxLife;
 global.playerInvincible = false;
 global.playerInvincibleTime = room_speed * 0.5;

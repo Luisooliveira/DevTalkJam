@@ -39,6 +39,11 @@ if (global.purifiedEnemy != id)
 			{
 				afterAttackWaitTimer = afterAttackWaitTime;
 			}
+			
+			if (alarm_get(2) == -1)
+			{
+				alarm[2] = 5;
+			}
 		}
 		else if (afterAttackWaitTimer > 0)
 		{

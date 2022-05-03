@@ -10,17 +10,19 @@ attackRadius = 28;
 attackWaitTime = room_speed * 1.0;
 attackWaitTimer = 0;
 attackSpeed = 3.0;
-attackDistance = 48;
+attackDistance = 54;
 attackDirection = 0;
 
 afterAttackWaitTime = room_speed * 2.0;
 afterAttackWaitTimer = 0;
 
 areaRadius = 96;
-
+angle = 0;
 
 OnAreaOverlap = function()
 {
+	angle++;
+	
 	var dir = point_direction(x, y, oPlayer.x, oPlayer.y);
 	
 	xSpeed = Approach(xSpeed, lengthdir_x(runSpeed, dir), runAcceleration);
@@ -29,6 +31,8 @@ OnAreaOverlap = function()
 
 OnAreaNotOverlap = function()
 {
+	angle = 0;
+	
 	xSpeed = Approach(xSpeed, 0, runAcceleration);
 	ySpeed = Approach(ySpeed, 0, runAcceleration);
 }

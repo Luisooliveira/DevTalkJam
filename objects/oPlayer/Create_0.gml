@@ -41,11 +41,14 @@ runAcceleration = 0.4;
 #endregion
 
 // Player gun
-gunYOffset = -4;
+gunXOffset = 4;
+gunYOffset = -6;
 gunDepth = depth;
 
 weapon = instance_create_depth(x, y + gunYOffset, depth - 1, oGun);
 weapon.owner = id;
+
+dir = 0;
 
 Hurt = function(by)
 {
@@ -82,7 +85,7 @@ EndStep = function()
 	// Animating the player
 	Animation(mouseIsDragging);
 	// Gun's position update
-	weapon.UpdatePosition();
+	weapon.UpdatePosition(dir);
 }
 
 #region Jump (obsolete)
@@ -120,7 +123,7 @@ UpdateInput = function(mouseIsDragging)
 	
 	if (global.inputMode == KEYBOARD)
 	{
-			global.inputDirection = point_direction(x, y, mouse_x, mouse_y);
+		global.inputDirection = point_direction(x + gunXOffset * facing, y + gunYOffset, mouse_x, mouse_y);
 	}
 	else
 	{
@@ -135,12 +138,19 @@ UpdateInput = function(mouseIsDragging)
 
 Animation = function(mouseIsDragging)
 {
-	if (mouseIsDragging)
+	if (xSpeed != 0 || ySpeed != 0)
 	{
-		facing = global.inputDirection > 90 && global.inputDirection < 270 ? 1 : -1;
+		sprite_index = sPlayerRun;
+	}
+	else
+	{
+		sprite_index = sPlayerIdle;
 	}
 	
-	gunDepth = global.inputDirection >= 180 && global.inputDirection <= 360 ? depth - 1 : depth + 1
+	dir = point_direction(x, y, mouse_x, mouse_y);
+	facing = dir > 90 && dir < 270 ? -1 : 1;
+	
+	gunDepth = global.inputDirection <= 135 && global.inputDirection >= 45 ? depth + 1 : depth - 1;
 }
 
 FreeUpdate = function()
@@ -153,7 +163,7 @@ FreeUpdate = function()
 	
 	if (xInput != 0)
 	{
-		facing = -xInput;
+		facing = xInput;
 	}
 	
 	xMove = lengthdir_x(moveMagnitude * runSpeed, moveDirection);

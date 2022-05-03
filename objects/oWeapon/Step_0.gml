@@ -22,6 +22,13 @@ else
 			side = 1;
 		}
 		delay = delayTime;
+		
+		with (oHUD)
+		{
+			weaponXScale = 3;
+			weaponYScale = 3;
+			weaponAngleApproach = weaponAngleStart + 45;
+		}
 	}
 }
 
